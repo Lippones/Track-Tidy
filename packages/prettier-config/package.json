@@ -1,0 +1,17 @@
+{
+  "name": "@workspace/prettier-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "PROPRIETARY",
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "prettier": "^3.5.1"
+  }
+}
