@@ -2,8 +2,8 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
+   "build": {
+      "dependsOn": ["^db:generate","^build", "trigger:deploy"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
@@ -30,6 +30,9 @@
     "trigger:dev": {
       "cache": false,
       "persistent": true
+    },
+    "trigger:deploy": {
+      "cache": false
     },
     "dev": {
       "dependsOn": ["^db:generate"],

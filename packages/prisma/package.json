@@ -9,6 +9,7 @@
     "db:reset": "pnpm env:load prisma migrate reset",
     "db:generate": "pnpm env:load prisma generate",
     "db:push": "pnpm env:load prisma db push",
+    "db:deploy": "pnpm env:load prisma migrate deploy",
     "db:studio": "pnpm env:load prisma studio",
     "env:load": "dotenv -e ../../.env --"
   },
