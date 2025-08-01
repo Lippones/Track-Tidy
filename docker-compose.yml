@@ -1,0 +1,15 @@
+services:
+  database:
+    image: bitnami/postgresql:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tracktiny
+      POSTGRES_DB: tracktiny
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+    driver: local

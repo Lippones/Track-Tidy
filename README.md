@@ -1,31 +1,36 @@
-# shadcn/ui monorepo template
+# 🔄 Fluxo resumido da aplicação (diagrama 1)
 
-This template is for creating a monorepo with shadcn/ui.
-
-## Usage
-
-```bash
-pnpm dlx shadcn@latest init
+```mermaid
+graph TD
+  A[Usuário logado via Spotify] --> B[Seleciona playlists]
+  B --> C[Define prompt]
+  C --> D[Envia para /api/playlist/submit]
+  D --> E[Trigger.dev dispara job em background]
+  E --> F[Job usa IA para organizar faixas]
+  F --> G[Cria nova playlist no Spotify]
+  G --> H[Salva resultado no banco]
+  H --> I[Frontend consulta status]
 ```
 
-## Adding components
+# 🧠 Fluxo do Job Trigger.dev (diagrama 2)
 
-To add components to your app, run the following command at the root of your `web` app:
-
-```bash
-pnpm dlx shadcn@latest add button -c apps/web
+```mermaid
+graph TD
+  A[Recebe evento de playlist.sort] --> B[Busca faixas]
+  B --> C[Chama Gemini com prompt e faixas]
+  C --> D[Ordena/separa faixas com IA]
+  D --> E[Cria playlist no Spotify]
+  E --> F[Salva resultado no banco com status: done]
 ```
 
-This will place the ui components in the `packages/ui/src/components` directory.
-
-## Tailwind
-
-Your `tailwind.config.ts` and `globals.css` are already set up to use the components from the `ui` package.
-
-## Using components
-
-To use the components in your app, import them from the `ui` package.
-
-```tsx
-import { Button } from '@workspace/ui/components/button'
+```mermaid
+graph TD
+  A[Job criado PENDING] --> B[Trigger.dev pega job]
+  B --> C[Status=PROCESSING]
+  C --> D[Fetch músicas no Spotify]
+  D --> E[generateObject organiza com IA]
+  E --> F[Cria playlists no Spotify]
+  F --> G[Atualiza DB com IDs das novas playlists]
+  G --> H[Status=DONE]
+  H --> I[Usuário vê resultado no painel]
 ```

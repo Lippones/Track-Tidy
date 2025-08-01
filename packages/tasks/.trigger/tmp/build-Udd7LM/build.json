@@ -1,0 +1,60 @@
+{
+  "contentHash": "bc26a9515d3488229beb455be1e39b7f",
+  "runtime": "node",
+  "cliPackageVersion": "3.3.17",
+  "packageVersion": "3.3.17",
+  "environment": "dev",
+  "target": "dev",
+  "files": [
+    {
+      "entry": "src/trigger/index.ts",
+      "out": "/home/lippe/desktop/projetos/Track-Tidy/packages/tasks/.trigger/tmp/build-Udd7LM/desktop/projetos/Track-Tidy/packages/tasks/src/trigger/index.mjs"
+    },
+    {
+      "entry": "src/trigger/playlist-organize.ts",
+      "out": "/home/lippe/desktop/projetos/Track-Tidy/packages/tasks/.trigger/tmp/build-Udd7LM/desktop/projetos/Track-Tidy/packages/tasks/src/trigger/playlist-organize.mjs"
+    }
+  ],
+  "sources": {
+    "src/trigger/index.ts": {
+      "contents": "eJxLrSjILypR0FJIK8rPVVDX0y/ISazMySwu0c0vSk/My6xKVecCAOrGDJQ=",
+      "contentHash": "3476ad68f1fa9d9b5c3e4ea67a174742"
+    },
+    "src/trigger/playlist-organize.ts": {
+      "contents": "eJy9VkuP2zYQvvtXTIEAkgJZdhogBwNpuvA6hYvuA1kHPRQFliuNbcYSqZLUer2O/3tIUZQl2UrSHKKDRZHfvL4ZzphmORcK9nArqMzINKXIFBxgKXgG3u9bLjYyJzGO8vLcG1AnkPLVCkUIMl5jRhZEbo5iSlBzGCX4OJLJZvT4uiH4XOOeedLYX6FaCBJv5Ht9eJdzRZe7GhpFo0LRVI40aqhK2NCcDKUFNvRwsSKMPqNV9jdV64v5qR6Hcsq2GjcktKEnFkgU3qZkl1Kp5A3r9ckih7mDDjk7+jWIOZMKLH/wFhhuW2T7wWCAT6XNClmpuak81DJHjv39AIAmE/AcbOgi8UJ9ZJETeI74wyeMVYkH+MQf5onZlTo1bKVtAhwCIyBQid0ELCwjTxdKYZYrOYHXod2jbEEz5IWasyu9/Wo8HsNLeDMOYTSCV+a8UGixSxIrLibwq1Ffai/YBIjcsRj8vfVC24W3v1UG2xH/yR9mT4ZAHTLZEupYixqAaElZ8pHR/wqsYgPYrlGgi8E8hqDSWLVzCKsFZXFaJG0sywsTrhIFhvVuIVE0UZpZTDWf7T1rqS1pHhLHvGBGaxt9xlX35II/0gSFSZNXF08bcwg7G+d9angwP+teBUApF3yDzEK6tgZ9X8e1W9n3QReyedMl+L+cpDSonVRrwbflNZgJwYV/766YSRmYewjzS3ixLxN4gISjBMYVoNFzH1hb1lRvkRR5om/kDxSIFiNNoFREFTqP3u3s+nJ+/Yf3P0KOTBFFrhb+Gf/7Lmqw3k+Id82r9IAySFhqBYn+FRqKZWl6LRrsLbKNrL4659qpX1k8ddXegrD3/KuhlFIVFXYsaH1L7t+/R6X7UaKTaZ2LUmQrtT44X8s+Wvl2H/z8nH64mc7u7nrT2ozFq9qx7p7O+7JUL+ZRFHlBMxH7mj+pZ4XLx7mx5PJhFfazr5uD7snw+TN49VTQpSCxkvT6MlDDk47TXlgTUnLWtS37iZiaaWdoOEbJmcviCRl2Nib1GK356BuvdYJNyZn+9e1ijOpu58JodbfvU+DwtQr6AWWRtrprm52vlsvUxn2WpD7yu1z1az/SWcmALMoQlkWanuj/YT0//0pOb65u/5otZpfecWTFuvhT1M5d6GSYNnlpjAbhSVq0SzZnncFrY7sibNcdldaPLu9RRnLfz8v/KX53tjpjZWlGNOmOVkYyNCfm3T1TXJHUNgADaXx2kQnKWNBcUW4KOGp8tudyEHzfZDZL/foCHz6NOw==",
+      "contentHash": "ba1ee0fc1172499d713969451d11c710"
+    },
+    "trigger.config.ts": {
+      "contents": "eJyNUsFuwjAMvfMVuYVJpWFCYlJPSGOHSRx2n9AUGhMCaVKSNIIh/n1u2iI2cdiprt/zs58dVdXWBXIhArbKwKs1WyXJlWydrQhdBKekBJcLiMyLA4szOlJDSe2Ur/jbKYDxyprHVZtGacFgIHnWVd3JcCFUQIjrD14euAT/T6XSOqCjEZySEBrgjQ6/jIwvI4Jj2j2UoSC0jb60NPZ41h7qEPnRN/sYDzRDHhi+0W2htxpWVkplZEGCa6BFHeAs4AvSSg5k8W6WEDsSpq+J2JigKsB2xgpIytrKFUTQmMMwpSp+WjaOt74LMptPpxlhjDyTnW0cwsnrrdfNckE+U4Y8WNr40kPouE8hnS66fbNSKzCBZu0W0gEw+rZi0v1NwrkGT9e9xPUp66M/N75rEsH5ND2d5y/5lGY3xJc7qDgCed5fe/h0SD48gaFZCtbDAoVyafKceVey/gXgaMj7ATYb3cA=",
+      "contentHash": "98e92d71405ee01c77809c163c3ccf57"
+    },
+    "package.json": {
+      "contents": "eJyVks1uwjAMx+88RdTjtCRQkLb1xJMgZY0pEflSEkoZ4t2XpE1hEps0pYfY/tl/1/F1gVClmYKqQdX2bNzRW9YCDcwfffWaoj04L4xOwJLEM3rDxeYcZfhJwuizTvQsJHdwJ8guxUTOFJrDQMJU0rdO2Gg06BrNVM2JrgPXcLDSXFKC1VYhLgc0hQiHfitjdR/QSCGMPcg9PhgfgEeLWYFPTqJDCNY3lJZMBUHspRhIa1TW/yHYz2qg+0YaxtHf2v0/paTQIWmATzdEYrpiAz4zp4XuPFoWsOgnmJsQTYQBEULTly1cRfKWRxhnAHGmuhXwMMctE9jzI+2M6WR+n92K1KSui0YBTMxmYgLWpF7PwMM/08+TkLmd3TpCq7enUCz3DLnvUmw9AbOjeXkCxd3xiv3CTZ1uksJHcY4jwq0cg+/zbsbYlylt1xtS36cGgzXucfFIwgj1ri1vSH+sakJK5I7OSCq8uC2+AcBj9JU=",
+      "contentHash": "ddbae36f78d8772940ad6d60ca2e0a2b"
+    }
+  },
+  "externals": [
+    {
+      "name": "import-in-the-middle",
+      "version": "1.11.0"
+    }
+  ],
+  "config": {
+    "project": "proj_lgnoqylseptvaqsujvvk",
+    "dirs": [
+      "./src/trigger"
+    ]
+  },
+  "outputPath": "/home/lippe/desktop/projetos/Track-Tidy/packages/tasks/.trigger/tmp/build-Udd7LM",
+  "runWorkerEntryPoint": "/home/lippe/desktop/projetos/Track-Tidy/packages/tasks/.trigger/tmp/build-Udd7LM/.cache/pnpm/dlx/6070dd8d6aedc2de0f43654e150fed5fe1dbf78eac92ffc7f872893787f7bd51/1986600562b-36656/node_modules/.pnpm/trigger.dev@3.3.17/node_modules/trigger.dev/dist/esm/entryPoints/dev-run-worker.mjs",
+  "indexWorkerEntryPoint": "/home/lippe/desktop/projetos/Track-Tidy/packages/tasks/.trigger/tmp/build-Udd7LM/.cache/pnpm/dlx/6070dd8d6aedc2de0f43654e150fed5fe1dbf78eac92ffc7f872893787f7bd51/1986600562b-36656/node_modules/.pnpm/trigger.dev@3.3.17/node_modules/trigger.dev/dist/esm/entryPoints/dev-index-worker.mjs",
+  "configPath": "/home/lippe/desktop/projetos/Track-Tidy/packages/tasks/.trigger/tmp/build-Udd7LM/desktop/projetos/Track-Tidy/packages/tasks/trigger.config.mjs",
+  "customConditions": [],
+  "deploy": {
+    "env": {}
+  },
+  "build": {},
+  "otelImportHook": {
+    "include": []
+  }
+}

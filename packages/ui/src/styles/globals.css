@@ -154,7 +154,22 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-}
+  --animate-shiny-text: shiny-text 8s infinite;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+  --animate-gradient: gradient 8s linear infinite
+;
+  @keyframes gradient {
+  to {
+    background-position: var(--bg-size, 300%) 0;
+    }
+  }}
 
 @layer base {
   *,
@@ -173,4 +188,63 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .swiper {
+          padding-bottom: 50px !important;
+        }
+        
+        .swiper-pagination {
+          bottom: 10px !important;
+        }
+        
+        .swiper-pagination-bullet {
+          width: 12px !important;
+          height: 12px !important;
+          background: rgba(0, 0, 0, 0.3) !important;
+          opacity: 1 !important;
+          margin: 0 4px !important;
+          transition: all 0.3s ease !important;
+        }
+        
+        .swiper-pagination-bullet-active {
+          background: #333 !important;
+          transform: scale(1.2) !important;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+          color: #333 !important;
+          background: rgba(255, 255, 255, 0.9) !important;
+          width: 40px !important;
+          height: 40px !important;
+          border-radius: 50% !important;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+          transition: all 0.3s ease !important;
+        }
+        
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+          background: rgba(255, 255, 255, 1) !important;
+          transform: scale(1.1) !important;
+        }
+        
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 16px !important;
+          font-weight: bold !important;
+        }
+        
+        .swiper-slide {
+          transition: all 0.3s ease !important;
+        }
+        
+        .swiper-slide:not(.swiper-slide-active) {
+          opacity: 0.7 !important;
+          transform: scale(0.9) !important;
+        }
+        
+        .swiper-slide-active {
+          opacity: 1 !important;
+          transform: scale(1) !important;
+        }
 }

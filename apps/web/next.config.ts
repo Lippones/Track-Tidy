@@ -1,9 +1,19 @@
 import type { NextConfig } from 'next'
-import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@workspace/ui']
+  transpilePackages: ['@workspace/ui'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.spotifycdn.com'
+      },
+      {
+        protocol: 'https',
+        hostname: '*.scdn.co'
+      }
+    ]
+  }
 }
 
-const withNextIntl = createNextIntlPlugin()
-export default withNextIntl(nextConfig)
+export default nextConfig

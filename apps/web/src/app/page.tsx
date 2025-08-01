@@ -1,7 +1,9 @@
-export default function Page() {
+import { Hero } from '@/components/home/hero'
+
+export default async function Page() {
   return (
     <div className="min-h-svh">
-      <h1>Hello World</h1>
+      <Hero />
     </div>
   )
 }
