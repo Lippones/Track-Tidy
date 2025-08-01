@@ -6,6 +6,8 @@ import { Button } from '@workspace/ui/components/button'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
+export const dynamic = 'force-dynamic'
+
 export default async function PlayList() {
   const queryClient = getQueryClient()
 
