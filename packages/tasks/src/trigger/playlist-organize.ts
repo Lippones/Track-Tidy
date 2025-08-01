@@ -1,11 +1,9 @@
-import { PrismaClient } from '@workspace/prisma'
 import { logger, schemaTask } from '@trigger.dev/sdk/v3'
 import { z } from 'zod'
 import { getTracksFromSpotify } from '../utils/get-tracks-from-spotify'
 import { organizeTracksWithAI } from '../utils/organize-tracks-with-ai'
 import { createPlaylistsOnSpotify } from '../utils/create-playlists-on-spotify'
-
-const prisma = new PrismaClient()
+import { prisma } from '@workspace/prisma'
 
 export const playlistOrganize = schemaTask({
   id: 'playlist-organize',
