@@ -64,8 +64,7 @@ export const auth = betterAuth({
         'playlist-read-private',
         'playlist-read-collaborative',
         'user-library-read'
-      ],
-      redirectURI: 'http://127.0.0.1:3000/api/auth/callback/spotify'
+      ]
     }
   }
 })
