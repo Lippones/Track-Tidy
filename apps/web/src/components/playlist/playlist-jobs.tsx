@@ -1,23 +1,15 @@
 'use client'
 
-import { getPlaylistJobs } from '@/actions/get-playlist-jobs'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import PlaylistJobCard from './playlist-job-card'
+import { getPlaylistJobs } from '@/services/playlists'
 
 export function PlayListJobs() {
   const {
     data: { jobs }
   } = useSuspenseQuery({
     queryKey: ['playlist-jobs', { page: 1, limit: 10 }],
-    queryFn: async () => {
-      const res = await getPlaylistJobs({ page: 1, limit: 10 })
-
-      if (res.serverError || !res.data) {
-        throw new Error(res.serverError)
-      }
-
-      return res.data
-    }
+    queryFn: async () => getPlaylistJobs({ page: 1, limit: 10 })
   })
 
   return (

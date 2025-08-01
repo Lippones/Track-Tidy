@@ -1,8 +1,8 @@
 import { Button } from '@workspace/ui/components/button'
 import { AvatarCircles } from '@workspace/ui/components/magicui/avatar-circles'
 import { MoveUpRight } from 'lucide-react'
-import { SongsCloud } from './songs-cloud'
 import Link from 'next/link'
+import SongsCloud from './songs-cloud'
 
 export function Hero() {
   return (

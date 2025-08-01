@@ -1,25 +1,17 @@
-import { getPlaylistJobs } from '@/actions/get-playlist-jobs'
 import { PlayListJobs } from '@/components/playlist/playlist-jobs'
 import { getQueryClient } from '@/lib/get-query-client'
+import { getPlaylistJobs } from '@/services/playlists'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { Button } from '@workspace/ui/components/button'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
-export default function PlayList() {
+export default async function PlayList() {
   const queryClient = getQueryClient()
 
-  void queryClient.prefetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: ['playlist-jobs', { page: 1, limit: 10 }],
-    queryFn: async () => {
-      const res = await getPlaylistJobs({ page: 1, limit: 10 })
-
-      if (res.serverError || !res.data) {
-        throw new Error(res.serverError)
-      }
-
-      return res.data
-    }
+    queryFn: async () => getPlaylistJobs({ page: 1, limit: 10 })
   })
 
   return (

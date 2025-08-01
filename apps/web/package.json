@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm env:load next dev --turbopack",
-    "build": "next build",
+    "build": "pnpm env:load next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
