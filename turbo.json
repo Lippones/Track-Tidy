@@ -32,6 +32,7 @@
       "persistent": true
     },
     "trigger:deploy": {
+      "dependsOn": ["^db:generate"],
       "cache": false
     },
     "dev": {
