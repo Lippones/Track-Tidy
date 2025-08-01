@@ -6,7 +6,7 @@ import { tasks } from '@workspace/tasks/trigger'
 import { headers } from 'next/headers'
 import { z } from 'zod'
 import type { playlistOrganize } from '@workspace/tasks'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@workspace/prisma'
 
 const inputSchema = z.object({
   playlists: z.array(

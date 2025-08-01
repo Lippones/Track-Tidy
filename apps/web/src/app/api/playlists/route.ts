@@ -1,8 +1,7 @@
-// app/api/playlist-jobs/route.ts
-import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { NextResponse } from 'next/server'
 import { auth } from '@workspace/auth'
+import { prisma } from '@workspace/prisma'
 
 const querySchema = z.object({
   page: z.preprocess(
