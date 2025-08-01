@@ -25,6 +25,7 @@
       "dependsOn": ["^check-types"]
     },
     "db:generate": {
+      "outputs": ["packages/prisma/generated/**"],
       "cache": false
     },
     "db:migrate": {
