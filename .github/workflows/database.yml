@@ -1,4 +1,4 @@
-name: Deploy Database
+name: Deploy Infra
 
 on:
   push:
@@ -48,3 +48,34 @@ jobs:
 
       - name: Deploy Prisma migrations
         run: pnpm turbo run db:deploy
+
+  trigger-deploy:
+    runs-on: ubuntu-22.04
+    needs: db-deploy
+    environment: secrets
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+          echo "TRIGGER_API_KEY=${{ secrets.TRIGGER_API_KEY }}" >> .env
+
+      - name: Deploy Trigger.dev
+        run: pnpm trigger:deploy
