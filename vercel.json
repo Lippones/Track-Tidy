@@ -1,3 +1,0 @@
-{
-  "installCommand": "pnpm install && pnpm turbo run db:generate"
-}
