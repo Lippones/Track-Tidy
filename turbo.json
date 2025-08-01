@@ -5,7 +5,18 @@
    "build": {
       "dependsOn": ["^db:generate","^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "DATABASE_URL",
+        "BETTER_AUTH_SECRET",
+        "BETTER_AUTH_URL",
+        "SPOTIFY_CLIENT_ID",
+        "SPOTIFY_CLIENT_SECRET",
+        "TRIGGER_SECRET_KEY",
+        "TRIGGER_API_URL",
+        "GOOGLE_GENERATIVE_AI_API_KEY",
+        "OPENAI_API_KEY"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]
