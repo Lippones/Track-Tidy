@@ -38,6 +38,9 @@ importers:
       '@ai-sdk/react':
         specifier: ^1.2.12
         version: 1.2.12(react@19.0.0)(zod@3.24.2)
+      '@prisma/nextjs-monorepo-workaround-plugin':
+        specifier: ^6.13.0
+        version: 6.13.0
       '@tanstack/react-query':
         specifier: ^5.84.1
         version: 5.84.1(react@19.0.0)
@@ -850,6 +853,9 @@ packages:
 
   '@prisma/get-platform@6.12.0':
     resolution: {integrity: sha512-nRerTGhTlgyvcBlyWgt8OLNIV7QgJS2XYXMJD1hysorMCuLAjuDDuoxmVt7C2nLxbuxbWPp7OuFRHC23HqD9dA==}
+
+  '@prisma/nextjs-monorepo-workaround-plugin@6.13.0':
+    resolution: {integrity: sha512-RUNHn4SDb5lu8k7AcS2N2O4pftYPu0rVVRNOG6qzekup+1alb1ezgykAhsWhS15a/Sa2TThyLSegP+Ef8+3xlw==}
 
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -4677,6 +4683,8 @@ snapshots:
   '@prisma/get-platform@6.12.0':
     dependencies:
       '@prisma/debug': 6.12.0
+
+  '@prisma/nextjs-monorepo-workaround-plugin@6.13.0': {}
 
   '@protobufjs/aspromise@1.1.2': {}
 
