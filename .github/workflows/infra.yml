@@ -78,4 +78,5 @@ jobs:
           echo "TRIGGER_API_KEY=${{ secrets.TRIGGER_API_KEY }}" >> .env
 
       - name: Deploy Trigger.dev
-        run: pnpm turbo trigger:deploy
+        working-directory: ./packages/tasks
+        run: pnpm trigger:deploy
