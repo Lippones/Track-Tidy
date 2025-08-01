@@ -20,8 +20,6 @@ export function PlayListJobs() {
     }
   })
 
-  console.log('Playlist Jobs:', jobs)
-
   return (
     <div className="w-full">
       <ul className="flex gap-4 flex-wrap w-full">
