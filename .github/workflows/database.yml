@@ -41,6 +41,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
+
       - name: Deploy Prisma migrations
         run: pnpm turbo run db:deploy
         env:
