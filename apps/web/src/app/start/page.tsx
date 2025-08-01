@@ -13,7 +13,7 @@ export default async function StartPage() {
   }
 
   return (
-    <div className="w-full flex flex-col justify-center items-center gap-4">
+    <div className="w-full flex flex-col justify-center items-center gap-10 md:px-12">
       <div className="text-center space-y-2">
         <h1 className="text-2xl font-bold">Bem-vindo, vamos começar!</h1>
 

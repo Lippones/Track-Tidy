@@ -8,7 +8,7 @@ export default function StartLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] items-center h-full overflow-hidden px-4 py-8 gap-4">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] items-center min-h-svh overflow-hidden px-4 py-8 gap-4">
       <motion.div
         className="max-lg:max-w-2xl mx-auto"
         initial={{
