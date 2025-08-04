@@ -97,6 +97,7 @@ model PlaylistJob {
 
   resultPlaylistId   String?
   playlistJobResults PlaylistJobResult[]
+  tokenUsage         TokenUsage[]
 
   @@index([userId, status])
   @@map("playlist_job")
@@ -127,4 +128,17 @@ model PlaylistJobInput {
 
   @@index([playlistId, name, jobId])
   @@map("playlist_job_input")
+}
+
+model TokenUsage {
+  id              String      @id @default(uuid())
+  embeddingTokens Int
+  inputTokens     Int
+  outputTokens    Int
+  modelCost       Int // Cents
+  embeddingCost   Int // Cents
+  totalCost       Int // Cents
+  playlistJobId   String
+  createdAt       DateTime    @default(now())
+  playlistJob     PlaylistJob @relation(fields: [playlistJobId], references: [id])
 }

@@ -1,11 +1,12 @@
 import { logger, schemaTask } from '@trigger.dev/sdk/v3'
 import { z } from 'zod'
 import { getTracksFromSpotify } from '../utils/get-tracks-from-spotify'
-import { organizeTracksWithAI } from '../utils/organize-tracks-with-ai'
 import { createPlaylistsOnSpotify } from '../utils/create-playlists-on-spotify'
 import { prisma } from '@workspace/prisma'
 import { organizeLargePlaylist } from '../utils/organize-large-playlist'
 import { auth } from '@workspace/auth'
+import { calculateTokenCost } from '../utils/calculate-token-cost'
+import { openaiCosts } from '../_contrasts/open-ai-costs'
 
 export const playlistOrganize = schemaTask({
   id: 'playlist-organize',
@@ -76,14 +77,15 @@ export const playlistOrganize = schemaTask({
 
     const aiStart = Date.now()
     // 4. Organização com NOVA lógica (chunking + K-means)
-    const { playlists } = await organizeLargePlaylist(
-      tracks,
-      playlistJob.prompt || 'Organize estas músicas',
-      {
-        chunkSize: advancedOptions?.chunkSize, // ← Parâmetros novos
-        maxPlaylists: advancedOptions?.maxPlaylists
-      }
-    )
+    const { playlists, embeddingTokens, inputTokens, outputTokens } =
+      await organizeLargePlaylist(
+        tracks,
+        playlistJob.prompt || 'Organize estas músicas',
+        {
+          chunkSize: advancedOptions?.chunkSize, // ← Parâmetros novos
+          maxPlaylists: advancedOptions?.maxPlaylists
+        }
+      )
 
     logger.info(
       `[Job ${jobId}] IA processou ${playlists.length} playlists (${Date.now() - aiStart}ms)`
@@ -102,6 +104,13 @@ export const playlistOrganize = schemaTask({
       `[Job ${jobId}] Playlists criadas no Spotify: ${createdPlaylists.length} (${Date.now() - spotifyCreateStart}ms)`
     )
 
+    const costs = calculateTokenCost({
+      inputTokens,
+      outputTokens,
+      embeddingTokens,
+      costs: openaiCosts
+    })
+
     // 6. Atualiza o job com resultados (igual ao atual)
     await prisma.playlistJob.update({
       where: { id: jobId },
@@ -116,6 +125,16 @@ export const playlistOrganize = schemaTask({
               totalTracks: p.totalTracks,
               description: p.description
             }))
+          }
+        },
+        tokenUsage: {
+          create: {
+            embeddingTokens,
+            inputTokens,
+            outputTokens,
+            modelCost: costs.inputCost + costs.outputCost,
+            embeddingCost: costs.embeddingCost,
+            totalCost: costs.totalCost
           }
         }
       }

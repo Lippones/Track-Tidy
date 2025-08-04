@@ -22,13 +22,19 @@ export async function organizeLargePlaylist(
 ) {
   const { chunkSize = 50, maxPlaylists = 10 } = options || {}
 
+  let inputTokens = 0
+  let outputTokens = 0
+  let embeddingTokens = 0
+
   console.log(`Processando ${tracks.length} faixas com chunkSize=${chunkSize}`)
 
   // --- Etapa 1: Pré-processamento com Embeddings ---
-  const { embeddings } = await embedMany({
+  const { embeddings, usage } = await embedMany({
     model: openai.textEmbeddingModel('text-embedding-3-small'),
     values: tracks.map((t) => `${t.name} - ${t.artists.join(', ')}`)
   })
+
+  embeddingTokens = usage?.tokens || 0
 
   // --- Etapa 2: Clusterização Automática ---
   let clusteredTracks: TrackInfo[][]
@@ -59,9 +65,16 @@ export async function organizeLargePlaylist(
 
   const chunkResults = await Promise.all(chunkPromises)
 
+  const playlists = chunkResults.map((result, i) => {
+    inputTokens += result.inputTokens
+    outputTokens += result.outputTokens
+
+    return result.playlists
+  })
+
   // --- Etapa 4: Consolidação e Validação ---
   const finalPlaylists = consolidatePlaylists(
-    chunkResults,
+    playlists,
     tracks.map((t) => t.id)
   )
 
@@ -75,7 +88,12 @@ export async function organizeLargePlaylist(
     console.log(`Playlist ${i + 1}: ${p.name}, Faixas: ${p.tracks.length}`)
   })
 
-  return { playlists: finalPlaylists.slice(0, maxPlaylists) }
+  return {
+    playlists: finalPlaylists.slice(0, maxPlaylists),
+    embeddingTokens,
+    inputTokens,
+    outputTokens
+  }
 }
 
 /**
@@ -129,7 +147,7 @@ async function processChunkWithAI(
   maxPlaylists: number
 ) {
   try {
-    const { object } = await generateObject({
+    const { object, usage } = await generateObject({
       model: openai('o4-mini'),
       schema: makePlaylistsSchema(tracks.map((t) => t.id)),
       prompt: `
@@ -147,10 +165,18 @@ async function processChunkWithAI(
       `
     })
 
-    return object.playlists
+    return {
+      playlists: object.playlists,
+      inputTokens: usage.promptTokens,
+      outputTokens: usage.completionTokens
+    }
   } catch (error) {
     console.error(`Failed to process chunk: ${error}`)
-    return []
+    return {
+      playlists: [],
+      inputTokens: 0,
+      outputTokens: 0
+    }
   }
 }
 
