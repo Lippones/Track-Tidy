@@ -79,9 +79,9 @@ export function PromptSelector() {
         }
       )
 
-      // localStorage.removeItem('selectedPlaylists') // TODO: Criar uma store
+      localStorage.removeItem('selectedPlaylists') // TODO: Criar uma store
 
-      // router.push('/playlists')
+      router.push('/playlists')
     } catch {
       toast.error('Erro ao criar a playlist. Tente novamente.', {
         id: toastId
