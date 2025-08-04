@@ -6,6 +6,13 @@ import { Badge } from '@workspace/ui/components/badge'
 import { Button } from '@workspace/ui/components/button'
 import { Card, CardContent } from '@workspace/ui/components/card'
 import { Textarea } from '@workspace/ui/components/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectValue,
+  SelectTrigger,
+  SelectItem
+} from '@workspace/ui/components/select'
 import { Send } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -18,6 +25,7 @@ export function PromptSelector() {
   const [selectedPrompt, setSelectedPrompt] = useState<number | null>(null)
   const [customPrompt, setCustomPrompt] = useState('')
   const [isCustomMode, setIsCustomMode] = useState(false)
+  const [maxPlaylists, setMaxPlaylists] = useState(1)
 
   const handlePromptSelect = (prompt: (typeof predefinedPrompts)[0]) => {
     setSelectedPrompt(prompt.id)
@@ -51,6 +59,7 @@ export function PromptSelector() {
       }>
 
       await createPlaylistJob({
+        maxPlaylists,
         playlists: playlists.map((p) => ({
           playlistId: p.id,
           name: p.name,
@@ -70,9 +79,9 @@ export function PromptSelector() {
         }
       )
 
-      localStorage.removeItem('selectedPlaylists') // TODO: Criar uma store
+      // localStorage.removeItem('selectedPlaylists') // TODO: Criar uma store
 
-      router.push('/playlists')
+      // router.push('/playlists')
     } catch {
       toast.error('Erro ao criar a playlist. Tente novamente.', {
         id: toastId
@@ -147,6 +156,27 @@ export function PromptSelector() {
           <span className="text-sm text-gray-500">
             {customPrompt.length}/500 caracteres
           </span>
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium px-2">
+            Máximo de Playlists
+          </label>
+          <Select
+            value={maxPlaylists.toString()}
+            onValueChange={(value) => setMaxPlaylists(Number(value))}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Selecione o máximo de playlists" />
+            </SelectTrigger>
+            <SelectContent>
+              {[1, 2, 3, 4, 5, 10].map((num) => (
+                <SelectItem key={num} value={num.toString()}>
+                  {num} {num === 1 ? 'Playlist' : 'Playlists'}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="relative">

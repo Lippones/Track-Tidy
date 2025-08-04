@@ -37,7 +37,7 @@ export default function PlaylistJobCard({
         return (
           <Badge
             variant="default"
-            className="bg-gray-500 hover:bg-gray-500/80 text-white"
+            className="bg-gray-300 hover:bg-gray-300/80 text-white"
           >
             <CheckCircle className="mr-1 h-3 w-3" />
             DRAFT
@@ -90,7 +90,7 @@ export default function PlaylistJobCard({
           <ListMusic className="h-4 w-4 text-muted-foreground" />
           <span className="text-sm text-muted-foreground">
             Total de Playlists criadas:{' '}
-            <Badge variant="outline">{totalTracks}</Badge>
+            <Badge variant="outline">{playlistJobResults.length}</Badge>
           </span>
         </div>
 

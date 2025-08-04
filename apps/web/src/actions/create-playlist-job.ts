@@ -18,12 +18,16 @@ const inputSchema = z.object({
       totalTracks: z.number().optional()
     })
   ),
+  maxPlaylists: z
+    .number()
+    .min(1, 'Max playlists must be at least 1')
+    .max(10, 'Max playlists cannot exceed 10'),
   prompt: z.string().min(1, 'Prompt is required')
 })
 
 export const createPlaylistJob = authActionClient
   .inputSchema(inputSchema)
-  .action(async ({ parsedInput: { playlists, prompt } }) => {
+  .action(async ({ parsedInput: { playlists, prompt, maxPlaylists } }) => {
     const session = await auth.api.getSession({
       headers: await headers()
     })
@@ -52,7 +56,10 @@ export const createPlaylistJob = authActionClient
     })
 
     await tasks.trigger<typeof playlistOrganize>('playlist-organize', {
-      jobId: job.id
+      jobId: job.id,
+      advancedOptions: {
+        maxPlaylists
+      }
     })
 
     return job

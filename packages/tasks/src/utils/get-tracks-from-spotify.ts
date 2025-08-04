@@ -3,7 +3,7 @@ import type { PlaylistJobInput } from '@workspace/prisma'
 export type TrackInfo = {
   id: string
   name: string
-  artist: string
+  artists: string[]
 }
 
 export async function getTracksFromSpotify(
@@ -46,7 +46,7 @@ export async function getTracksFromSpotify(
         allTracks.push({
           id: track.id,
           name: track.name,
-          artist: track.artists.map((a: any) => a.name).join(', ')
+          artists: track.artists.map((a: any) => a.name)
         })
       }
 

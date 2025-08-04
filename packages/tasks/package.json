@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "trigger:deploy": "pnpm dlx trigger.dev@latest deploy --self-hosted --api-url https://trigger.metiflix.com",
+    "trigger:deploy": "pnpm env:load pnpm dlx trigger.dev@latest deploy --load-image --push --self-hosted --api-url https://trigger.metiflix.com",
     "trigger:dev": "pnpm env:load pnpm dlx trigger.dev@latest dev --api-url https://trigger.metiflix.com",
     "lint": "eslint . --max-warnings 0",
     "env:load": "dotenv -e ../../.env --"
@@ -15,10 +15,14 @@
     "@ai-sdk/openai": "^1.3.23",
     "@trigger.dev/build": "^3.3.17",
     "@trigger.dev/sdk": "^3.3.17",
+    "@workspace/auth": "workspace:*",
     "@workspace/env": "workspace:*",
     "@workspace/prisma": "workspace:*",
     "ai": "^4.3.19",
     "dotenv-cli": "^8.0.0",
+    "kmeans-js": "^0.1.2",
+    "ml-kmeans": "^6.0.0",
+    "ml-pca": "^4.1.1",
     "zod": "^3.24.2"
   },
   "exports": {
