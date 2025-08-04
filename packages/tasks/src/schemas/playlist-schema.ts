@@ -1,13 +1,15 @@
 import { z } from 'zod'
 
 export const PlaylistsSchema = z.object({
-  playlists: z.array(
-    z.object({
-      name: z.string(),
-      description: z.string().optional(),
-      tracks: z.array(z.string())
-    })
-  )
+  playlists: z
+    .array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        tracks: z.array(z.string())
+      })
+    )
+    .max(10)
 })
 
 export function makePlaylistsSchema(validIds: string[]) {

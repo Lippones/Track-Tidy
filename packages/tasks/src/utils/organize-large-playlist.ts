@@ -1,6 +1,10 @@
 import { openai } from '@ai-sdk/openai'
 import { embedMany } from 'ai'
-import { makePlaylistsSchema } from '../schemas/playlist-schema'
+import {
+  makePlaylistsSchema,
+  PlaylistsSchema,
+  type PlaylistsSchemaType
+} from '../schemas/playlist-schema'
 import { generateObject } from 'ai'
 import type { TrackInfo } from './get-tracks-from-spotify'
 import { kmeans } from 'ml-kmeans'
@@ -149,7 +153,7 @@ async function processChunkWithAI(
   try {
     const { object, usage } = await generateObject({
       model: openai('o4-mini'),
-      schema: makePlaylistsSchema(tracks.map((t) => t.id)),
+      schema: PlaylistsSchema,
       prompt: `
         INSTRUCTIONS:
         1. Crie até ${maxPlaylists} playlists com base no seguinte prompt: "${prompt}".
@@ -167,8 +171,8 @@ async function processChunkWithAI(
 
     return {
       playlists: object.playlists,
-      inputTokens: usage.promptTokens,
-      outputTokens: usage.completionTokens
+      inputTokens: usage.inputTokens || 0,
+      outputTokens: usage.outputTokens || 0
     }
   } catch (error) {
     console.error(`Failed to process chunk: ${error}`)
