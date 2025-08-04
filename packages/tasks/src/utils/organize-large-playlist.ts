@@ -42,7 +42,11 @@ export async function organizeLargePlaylist(
       })
     } catch (error) {
       console.error('Clusterização falhou:', error)
-      clusteredTracks = [tracks]
+      // Fallback: Divide em chunks manuais
+      clusteredTracks = []
+      for (let i = 0; i < tracks.length; i += chunkSize) {
+        clusteredTracks.push(tracks.slice(i, i + chunkSize))
+      }
     }
   } else {
     clusteredTracks = [tracks]
@@ -83,24 +87,21 @@ function clusterTracksByEmbeddings(
   k: number
 ): TrackInfo[][] {
   try {
-    // Normaliza os embeddings
     const normalizedEmbeddings = embeddings.map((embedding) => {
       const norm = Math.sqrt(embedding.reduce((sum, x) => sum + x * x, 0))
       return embedding.map((x) => x / (norm || 1))
     })
 
-    // Garante que k seja razoável
-    const minClusters = Math.max(2, Math.ceil(tracks.length / 100)) // Pelo menos 2 clusters ou mais, dependendo do tamanho
-    const finalK = Math.min(k, minClusters, tracks.length) // Evita k maior que o número de faixas
+    // Garante pelo menos 5 clusters ou mais, dependendo do tamanho
+    const minClusters = Math.max(5, Math.ceil(tracks.length / 50))
+    const finalK = Math.min(k, minClusters, tracks.length)
     console.log(`Calculando ${finalK} clusters para ${tracks.length} faixas`)
 
-    // Executa K-means
     const { clusters } = kmeans(normalizedEmbeddings, finalK, {
       initialization: 'kmeans++',
       maxIterations: 100
     })
 
-    // Organiza os resultados
     const clusteredTracks: TrackInfo[][] = Array(finalK)
       .fill(null)
       .map(() => [])
@@ -111,8 +112,14 @@ function clusterTracksByEmbeddings(
 
     return clusteredTracks.filter((cluster) => cluster.length > 0)
   } catch (error) {
-    console.error('Clusterização falhou:', error)
-    return [tracks] // Fallback
+    console.error('Clusterization failed:', error)
+    // Fallback: Divide em chunks manuais
+    const chunkSize = 50
+    const manualClusters: TrackInfo[][] = []
+    for (let i = 0; i < tracks.length; i += chunkSize) {
+      manualClusters.push(tracks.slice(i, i + chunkSize))
+    }
+    return manualClusters
   }
 }
 
