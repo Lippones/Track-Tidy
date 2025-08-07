@@ -11,12 +11,14 @@
     "db:push": "pnpm env:load prisma db push",
     "db:deploy": "pnpm env:load prisma migrate deploy",
     "db:studio": "pnpm env:load prisma studio",
+    "db:seed": "pnpm env:load pnpm prisma db seed",
     "env:load": "dotenv -e ../../.env --",
     "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",
     "dotenv-cli": "^8.0.0",
+    "tsx": "^4.20.3",
     "zod": "^4.0.8"
   },
   "devDependencies": {
@@ -24,5 +26,8 @@
   },
   "exports": {
     ".": "./index.ts"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }

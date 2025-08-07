@@ -1,3 +1,4 @@
+import { Header } from '@/components/playlist/header'
 import { PlayListJobs } from '@/components/playlist/playlist-jobs'
 import { getQueryClient } from '@/lib/get-query-client'
 import { getPlaylistJobs } from '@/services/playlists'
@@ -17,31 +18,35 @@ export default async function PlayList() {
   })
 
   return (
-    <div className="container w-full mx-auto p-4">
-      <h1 className="text-2xl font-bold">PlayList</h1>
+    <div>
+      <Header />
 
-      <p className="mt-2 text-sm text-muted-foreground">
-        Aqui você pode ver os jobs de playlists que foram criados. Cada job
-        representa uma solicitação para criar uma playlist com base em um prompt
-        específico. Você pode clicar em cada job para ver os detalhes e acessar
-        a playlist criada.
-      </p>
+      <div className="container w-full mx-auto p-4">
+        <h1 className="text-2xl font-bold">PlayList</h1>
 
-      <Button>
-        <Link
-          href="/start/playlists"
-          className="flex items-center justify-center w-full h-full"
-        >
-          Criar nova playlist
-        </Link>
-      </Button>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Aqui você pode ver os jobs de playlists que foram criados. Cada job
+          representa uma solicitação para criar uma playlist com base em um
+          prompt específico. Você pode clicar em cada job para ver os detalhes e
+          acessar a playlist criada.
+        </p>
 
-      <div className="mt-10 w-full">
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <Suspense fallback={<div>Loading...</div>}>
-            <PlayListJobs />
-          </Suspense>
-        </HydrationBoundary>
+        <Button>
+          <Link
+            href="/start/playlists"
+            className="flex items-center justify-center w-full h-full"
+          >
+            Criar nova playlist
+          </Link>
+        </Button>
+
+        <div className="mt-10 w-full">
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <Suspense fallback={<div>Loading...</div>}>
+              <PlayListJobs />
+            </Suspense>
+          </HydrationBoundary>
+        </div>
       </div>
     </div>
   )

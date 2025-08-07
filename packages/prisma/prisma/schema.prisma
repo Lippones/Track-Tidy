@@ -22,18 +22,25 @@ enum PlaylistJobStatus {
   FAILED
 }
 
+enum TransactionType {
+  PURCHASE
+  SPEND
+}
+
 model User {
-  id            String        @id @default(uuid())
-  slug          String        @unique
-  name          String
-  email         String
-  emailVerified Boolean
-  image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
-  sessions      Session[]
-  accounts      Account[]
-  playlistJob   PlaylistJob[]
+  id                String              @id @default(uuid())
+  slug              String              @unique
+  name              String
+  email             String
+  emailVerified     Boolean
+  image             String?
+  credits           Int                 @default(0)
+  createdAt         DateTime
+  updatedAt         DateTime
+  sessions          Session[]
+  accounts          Account[]
+  playlistJob       PlaylistJob[]
+  CreditTransaction CreditTransaction[]
 
   @@unique([email])
   @@map("user")
@@ -141,4 +148,23 @@ model TokenUsage {
   playlistJobId   String
   createdAt       DateTime    @default(now())
   playlistJob     PlaylistJob @relation(fields: [playlistJobId], references: [id])
+}
+
+model CreditPackage {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  credits     Int
+  price       Int // in cents
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CreditTransaction {
+  id        String          @id @default(uuid())
+  userId    String
+  user      User            @relation(fields: [userId], references: [id])
+  amount    Int
+  type      TransactionType
+  createdAt DateTime        @default(now())
 }
