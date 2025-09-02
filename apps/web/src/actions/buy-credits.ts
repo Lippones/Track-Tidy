@@ -9,8 +9,11 @@ import AbacatePay from 'abacatepay-nodejs-sdk'
 
 const inputSchema = z.object({
   packageId: z.string().min(1, 'Package ID is required'),
-  paymentMethod: z.enum(['card', 'pix']).default('card')
+  paymentMethod: z.enum(['card', 'pix']).default('card'),
+  callbackUrl: z.url().optional()
 })
+
+const WEBHOOK_ENDPOINT = `${env.NEXT_PUBLIC_APP_URL}/api/webhooks/stripe`
 
 const stripe = new Stripe(env.STRIPE_API_KEY)
 const abacate = AbacatePay(env.ABACATEPAY_API_KEY)
@@ -18,9 +21,10 @@ const abacate = AbacatePay(env.ABACATEPAY_API_KEY)
 export const buyCredits = authActionClient
   .inputSchema(inputSchema)
   .action(
-    async ({ parsedInput: { packageId, paymentMethod }, ctx: { user } }) => {
-      const userId = user.id
-
+    async ({
+      parsedInput: { packageId, paymentMethod, callbackUrl },
+      ctx: { user }
+    }) => {
       const creditPackage = await prisma.creditPackage.findUnique({
         where: { id: packageId }
       })
@@ -47,7 +51,7 @@ export const buyCredits = authActionClient
               price: creditPackage.price * 5 // em centavos x dollar
             }
           ],
-          returnUrl: `${env.NEXT_PUBLIC_APP_URL}/playlists`
+          returnUrl: callbackUrl ?? `${env.NEXT_PUBLIC_APP_URL}/playlists`
         })
 
         if (order.error) {
@@ -62,6 +66,17 @@ export const buyCredits = authActionClient
       const checkout = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         mode: 'payment',
+        currency: 'usd',
+        cancel_url: callbackUrl ?? `${env.NEXT_PUBLIC_APP_URL}/playlists`,
+        success_url: callbackUrl ?? `${env.NEXT_PUBLIC_APP_URL}/playlists`,
+        customer_email: user.email || undefined,
+        payment_intent_data: {
+          metadata: {
+            packageId,
+            userId: user.id, // Adicione o userId para facilitar o processamento
+            webhookUrl: WEBHOOK_ENDPOINT // Referência do webhook
+          }
+        },
         line_items: [
           {
             price_data: {
@@ -76,7 +91,6 @@ export const buyCredits = authActionClient
           }
         ],
         metadata: {
-          userId,
           packageId
         }
       })

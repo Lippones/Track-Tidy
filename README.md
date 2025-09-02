@@ -22,15 +22,3 @@ graph TD
   D --> E[Cria playlist no Spotify]
   E --> F[Salva resultado no banco com status: done]
 ```
-
-```mermaid
-graph TD
-  A[Job criado PENDING] --> B[Trigger.dev pega job]
-  B --> C[Status=PROCESSING]
-  C --> D[Fetch músicas no Spotify]
-  D --> E[generateObject organiza com IA]
-  E --> F[Cria playlists no Spotify]
-  F --> G[Atualiza DB com IDs das novas playlists]
-  G --> H[Status=DONE]
-  H --> I[Usuário vê resultado no painel]
-```

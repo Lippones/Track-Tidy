@@ -153,7 +153,7 @@ export function PromptSelector() {
               ? 'Ou descreva seu próprio estilo'
               : 'Estilo Selecionado'}
           </h2>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-muted-foreground">
             {customPrompt.length}/500 caracteres
           </span>
         </div>
@@ -201,7 +201,7 @@ export function PromptSelector() {
         </div>
 
         <div className="flex justify-between items-center">
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-muted-foreground">
             {selectedPrompt && !isCustomMode && (
               <span className="flex items-center gap-1">
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
@@ -218,9 +218,14 @@ export function PromptSelector() {
             disabled={!customPrompt.trim() || isLoading}
           >
             <Send className="w-4 h-4 mr-2" />
-            Organizar Playlists
+            Criar Playlist organizada
           </Button>
         </div>
+
+        <p className="text-sm text-muted-foreground text-center">
+          Fique tranquilo, não editamos suas playlists existentes. Apenas
+          criamos novas com base no estilo escolhido.
+        </p>
       </div>
     </div>
   )

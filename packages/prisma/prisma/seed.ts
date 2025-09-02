@@ -3,51 +3,29 @@ import { PrismaClient } from '../generated/prisma'
 const prisma = new PrismaClient()
 
 async function seed() {
-  const packages = [
-    {
-      name: 'Starter Vibes',
-      description: 'Ideal para testar o app e criar sua primeira playlist.',
-      credits: 100,
-      price: 100 // US$1.00 (em centavos)
-    },
-    {
-      name: 'Music Lover',
-      description: 'Perfeito para criar várias playlists incríveis.',
-      credits: 500,
-      price: 450 // US$4.50 (10% de desconto)
-    },
-    {
-      name: 'DJ Pro',
-      description: 'Para quem quer organizar playlists como um pro.',
-      credits: 1000,
-      price: 850 // US$8.50 (15% de desconto)
-    },
-    {
-      name: 'Festival Bundle',
-      description: 'Organize playlists épicas para festivais inteiros!',
-      credits: 2500,
-      price: 2000 // US$20.00 (20% de desconto)
-    }
-  ]
-
-  for (const pkg of packages) {
-    await prisma.creditPackage.upsert({
-      where: { name: pkg.name },
-      update: {
-        description: pkg.description,
-        credits: pkg.credits,
-        price: pkg.price,
-        updatedAt: new Date()
+  await prisma.creditPackage.createMany({
+    data: [
+      {
+        name: 'Starter',
+        description: 'Pacote inicial',
+        credits: 33,
+        price: 2900 // 29.00 in cents
       },
-      create: {
-        name: pkg.name,
-        description: pkg.description,
-        credits: pkg.credits,
-        price: pkg.price
+      {
+        name: 'Plus',
+        description: 'Pacote mais popular',
+        credits: 75,
+        price: 5900 // 59.00 in cents
+      },
+      {
+        name: 'Pro',
+        description: 'Para heavy users',
+        credits: 160,
+        price: 11900 // 119.00 in cents
       }
-    })
-    console.log(`Pacote ${pkg.name} criado ou atualizado.`)
-  }
+    ],
+    skipDuplicates: true
+  })
 
   console.log('Database seeded')
   await prisma.$disconnect()

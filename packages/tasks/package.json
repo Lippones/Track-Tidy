@@ -5,14 +5,14 @@
   "private": true,
   "main": "index.ts",
   "scripts": {
-    "trigger:deploy": "pnpm env:load pnpm dlx trigger.dev@latest deploy --load-image --push --self-hosted --api-url https://trigger.metiflix.com",
-    "trigger:dev": "pnpm env:load pnpm dlx trigger.dev@latest dev --api-url https://trigger.metiflix.com",
+    "trigger:deploy": "pnpm env:load pnpm dlx trigger.dev@latest deploy --load-image",
+    "trigger:dev": "pnpm env:load pnpm dlx trigger.dev@latest dev",
     "lint": "eslint . --max-warnings 0",
     "env:load": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "@ai-sdk/google": "^1.2.22",
-    "@ai-sdk/openai": "2.0.2",
+    "@ai-sdk/google": "2.0.6",
+    "@ai-sdk/openai": "2.0.13",
     "@trigger.dev/build": "^3.3.17",
     "@trigger.dev/sdk": "^3.3.17",
     "@workspace/auth": "workspace:*",

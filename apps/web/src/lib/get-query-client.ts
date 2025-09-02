@@ -10,6 +10,11 @@ function makeQueryClient() {
       dehydrate: {
         shouldDehydrateQuery: (query) =>
           defaultShouldDehydrateQuery(query) || query.state.status === 'pending'
+      },
+      queries: {
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        retry: false
       }
     }
   })

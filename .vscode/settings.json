@@ -10,5 +10,6 @@
     "typescriptreact"
   ],
   "eslint.useFlatConfig": true,
-  "eslint.nodePath": "packages/eslint-config/node_modules"
+  "eslint.nodePath": "packages/eslint-config/node_modules",
+  "notebook.defaultFormatter": "esbenp.prettier-vscode"
 }

@@ -88,9 +88,7 @@ export function SelectPlaylists({
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-sm truncate">
-                      {playlist.name}
-                    </h3>
+                    <h3 className="font-medium text-sm">{playlist.name}</h3>
                     <p className="text-xs text-muted-foreground">
                       {playlist.total}{' '}
                       {playlist.total === 1 ? 'música' : 'músicas'}

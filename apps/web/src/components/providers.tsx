@@ -1,6 +1,7 @@
 import { QueryClientProvider } from './query-client-provider'
 import { ThemeProvider } from './theme-provider'
 import { Toaster } from '@workspace/ui/components/sonner'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -10,7 +11,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       forcedTheme="dark"
       disableTransitionOnChange
     >
-      <QueryClientProvider>{children}</QueryClientProvider>
+      <QueryClientProvider>
+        <NuqsAdapter>{children}</NuqsAdapter>
+      </QueryClientProvider>
       <Toaster />
     </ThemeProvider>
   )

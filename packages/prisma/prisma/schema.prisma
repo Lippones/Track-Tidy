@@ -24,23 +24,24 @@ enum PlaylistJobStatus {
 
 enum TransactionType {
   PURCHASE
-  SPEND
+  USAGE
+  BONUS
 }
 
 model User {
-  id                String              @id @default(uuid())
-  slug              String              @unique
-  name              String
-  email             String
-  emailVerified     Boolean
-  image             String?
-  credits           Int                 @default(0)
-  createdAt         DateTime
-  updatedAt         DateTime
-  sessions          Session[]
-  accounts          Account[]
-  playlistJob       PlaylistJob[]
-  CreditTransaction CreditTransaction[]
+  id                 String              @id @default(uuid())
+  slug               String              @unique
+  name               String
+  email              String
+  emailVerified      Boolean
+  image              String?
+  credits            Int                 @default(0)
+  createdAt          DateTime
+  updatedAt          DateTime
+  sessions           Session[]
+  accounts           Account[]
+  playlistJob        PlaylistJob[]
+  creditTransactions CreditTransaction[]
 
   @@unique([email])
   @@map("user")
@@ -151,13 +152,14 @@ model TokenUsage {
 }
 
 model CreditPackage {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  description String?
-  credits     Int
-  price       Int // in cents
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                String              @id @default(uuid())
+  name              String              @unique
+  description       String?
+  credits           Int
+  price             Int // in cents
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  CreditTransaction CreditTransaction[]
 }
 
 model CreditTransaction {
@@ -166,5 +168,7 @@ model CreditTransaction {
   user      User            @relation(fields: [userId], references: [id])
   amount    Int
   type      TransactionType
+  packageId String?
+  package   CreditPackage?  @relation(fields: [packageId], references: [id])
   createdAt DateTime        @default(now())
 }
